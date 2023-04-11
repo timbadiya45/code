@@ -6,7 +6,7 @@ const Products = () => {
         <div className="products-container">
             <div className="sec-heading">Section Heading</div>
             <div className="products">
-            <Product />
+            <Product thumbnail={"fkjs"} prodDetails={"kfsjd"}/>
             <Product />
             <Product />
             <Product />

@@ -48,7 +48,7 @@ const Footer = () => {
                 © 2023 WeaLMery AROMA. All rights reserved.
 
                 </div>
-                <img src={Images.payment} />
+                <img src={Images.payment} alt="" />
 
             </div>
 

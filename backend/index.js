@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mysql from "mysql";
 
+//user- id,name, email id, phone, password, isLoggedIn, cart, wishlist, profile img
+
 console.log("Hello CodeSandbox");
 //const express = require("express");
 // const bodyParser = require("body-parser");

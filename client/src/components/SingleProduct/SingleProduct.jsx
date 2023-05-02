@@ -15,10 +15,26 @@ import prod from "../../assets/products/earbuds-prod-1.webp";
 import "./SingleProduct.scss";
 import { useEffect } from "react";
 import { useApiContext } from "../../utils/context";
+import { BsFillCartDashFill } from "react-icons/bs";
+
 const SingleProduct = () => {
   const [productData, setProductData] = useState({});
-  const { data, getParticularData } = useApiContext();
+  const { data, getParticularData, cart, handleCart } = useApiContext();
+  const [addCart, setAddCart] = useState(false);
+  const [numItems, setNumItems] = useState(1);
+
   const params = useParams();
+
+  useEffect(() => {
+    const checkCart = cart && cart.filter((item) => item?.product?.id === productData.id);
+    if(checkCart.length> 0){
+      setAddCart(true);
+      setNumItems(checkCart.numItems)
+    }
+    else setAddCart(false);
+  }, [
+     addCart
+  ])
 
   useEffect(() => {
     async function fetchData() {
@@ -30,6 +46,21 @@ const SingleProduct = () => {
     }
     fetchData();
   }, []);
+
+  const handlecart = () => {
+    setAddCart(!addCart);
+    handleCart(productData);
+  }
+
+  const addItem = () => {
+    setNumItems(numItems+1);
+  }
+
+  const reduceItem = () => {
+    if(numItems> 0)
+    setNumItems(numItems-1);
+  }
+
 
   return (
     <div className="single-product-main-content">
@@ -45,13 +76,15 @@ const SingleProduct = () => {
 
             <div className="cart-buttons">
               <div className="quantity-buttons">
-                <span>-</span>
-                <span>5</span>
-                <span>+</span>
+                <span onClick={reduceItem}>-</span>
+                <span>{numItems}</span>
+                <span onClick={addItem}>+</span>
               </div>
-              <button className="add-to-cart-button">
-                <FaCartPlus size={20} />
-                ADD TO CART
+              <button className={!addCart ? "add-to-cart-button": ""} onClick={handlecart}>
+                {addCart ? (<>
+                <BsFillCartDashFill /> Remove from Cart
+                </>): (<><FaCartPlus size={20} />
+                ADD TO CART</>)}
               </button>
             </div>
             <span className="divider" />

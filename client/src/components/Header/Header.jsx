@@ -8,7 +8,7 @@ import LogoImg from "../../assets/wealmery-logo.png";
 
 import Search from "./Search/Search";
 import Cart from "../Cart/Cart";
-import { Context } from "../../utils/context";
+import { Context, useApiContext } from "../../utils/context";
 
 import "./Header.scss";
 
@@ -16,6 +16,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const { cart } = useApiContext();
   const handleScroll = () => {
     const offset = window.scrollY;
     if (offset > 200) {
@@ -47,7 +48,7 @@ const Header = () => {
             <AiOutlineHeart />
             <span className="cart-icon" onClick={() => setShowCart(true)}>
               <CgShoppingCart />
-              <span>5</span>
+              <span>{cart.length}</span>
             </span>
           </div>
         </div>

@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="title">Contact</div>
                 <div className="c-item">
                     <FaLocationArrow />
-                    <div className="text">lf-17/9, b.t.m. layout 2nd stage, bangalore, karnataka, 560076</div>
+                    <div className="text">LF-17/9, B.T.M. Layout 2nd Stage, Bangalore, Karnataka, 560076</div>
                 </div>
                 <div className="c-item">
                     <FaMobileAlt />

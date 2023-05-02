@@ -1,4 +1,6 @@
+import { useState } from "react";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
+import { useParams } from "react-router-dom";
 import {
   FaFacebookF,
   FaTwitter,
@@ -11,18 +13,35 @@ import {
 import prod from "../../assets/products/earbuds-prod-1.webp";
 
 import "./SingleProduct.scss";
+import { useEffect } from "react";
+import { useApiContext } from "../../utils/context";
 const SingleProduct = () => {
+  const [productData, setProductData] = useState({});
+  const { data, getParticularData } = useApiContext();
+  const params = useParams();
+
+  useEffect(() => {
+    async function fetchData() {
+    const ans = await getParticularData(params.id);
+    console.log(ans);
+    if(ans){
+    setProductData(ans[0]);
+    }
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="single-product-main-content">
       <div className="layout">
         <div className="single-product-page">
           <div className="left">
-            <img src={prod} alt="" />
+            <img src={productData.img || prod} alt="" />
           </div>
           <div className="right">
-            <span className="name">product name</span>
-            <span className="price">price</span>
-            <span className="desc">product description</span>
+            <span className="name">{productData.Product}</span>
+            <span className="price">{productData.Price}</span>
+            <span className="desc">{productData.Description}</span>
 
             <div className="cart-buttons">
               <div className="quantity-buttons">
